@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>reddit is fun themes</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Le styles -->
+    <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
+    <style type="text/css">
+      body {
+        padding-top: 20px;
+        padding-bottom: 40px;
+      }
+
+      /* Custom container */
+      .container-narrow {
+        margin: 0 auto;
+        max-width: 700px;
+      }
+      .container-narrow > hr {
+        margin: 30px 0;
+      }
+
+      /* Main marketing message and sign up button */
+      .jumbotron.subhead {
+        padding: 40px 0;
+        margin: 0;
+      }
+      .jumbotron h1 {
+        font-size: 72px;
+        line-height: 1;
+      }
+      .jumbotron .btn {
+        font-size: 21px;
+        padding: 14px 24px;
+      }
+    </style>
+    <link href="bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+    <link href="css/docs.css" rel="stylesheet">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="../assets/js/html5shiv.js"></script>
+    <![endif]-->
+
+    <!-- Fav and touch icons -->
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="../assets/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../assets/ico/apple-touch-icon-114-precomposed.png">
+      <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/ico/apple-touch-icon-72-precomposed.png">
+                    <link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png">
+                                   <link rel="shortcut icon" href="../assets/ico/favicon.png">
+  </head>
+
+  <body data-spy="scroll" data-target=".rt-docs-sidebar">
+
+    <div class="container-narrow">
+      <div class="masthead">
+        <ul class="nav nav-pills pull-right">
+          <li><a href="index.html">Home</a></li>
+          <li class="active"><a href="getting-started.html">Get started</a></li>
+          <li><a href="api.html">API</a></li>
+          <li><a href="http://www.reddit.com/r/redditisfunthemes">/r/</a></li>
+        </ul>
+        <h3 class="muted">reddit is fun &middot; themes</h3>
+      </div>
+
+      <hr>
+    </div>  <!-- /container-narrow -->
+    
+    <!-- Subhead
+	================================================== -->
+	<header class="jumbotron subhead">
+	  <div class="container">
+	    <h1>Getting started</h1>
+	    <p class="lead">For designers &amp; developers</p>
+	  </div>
+	</header>
+      
+    <div class="container-fluid">
+      <div class="row">
+
+          <div class="span3 rt-docs-sidebar">
+            <ul class="nav nav-list rt-docs-sidenav" data-spy="affix" data-offset-top="300">
+              <li><a href="#install"><i class="icon-chevron-right"></i> Install</a></li>
+              <li><a href="#newtheme"><i class="icon-chevron-right"></i> Start a new theme</a></li>
+              <li><a href="#convertxml"><i class="icon-chevron-right"></i> Convert Android Layout</a></li>
+              <li><a href="#testing"><i class="icon-chevron-right"></i> Test your theme</a></li>
+              <li><a href="#submitting"><i class="icon-chevron-right"></i> Submit your theme</a></li>
+            </ul>
+          </div>
+          
+          <div class="span9">
+		      <section id="install">
+	              <div class="page-header">
+	                <h1>Install</h1>
+	              </div>
+	              
+	              <h4>Required</h4>
+		          <p>You'll need the following to make themes.</p>
+		          <ul>
+                      <li>reddit is fun 3.0 alpha or beta:
+                          <ol>
+                              <li><a href="https://plus.google.com/communities/114050744871875290633">Join the Google+ community</a></li>
+                              <li>Hit one of the opt-in links listed in the Google+ community's sidebar.</li>
+                          </ol>
+                      </li>
+		              <li><a href="http://developer.android.com/sdk/index.html">Android SDK</a> (for <code>adb</code> and <code>aapt</code> tools)
+		                  <ul>
+		                      <li><a href="http://www.addictivetips.com/mobile/what-is-adb-and-how-to-install-it-android/">Step-by-step guide</a> to installing Android SDK, Platform Tools, <code>PATH</code> variable, USB drivers</li>
+		                      <li><a href="http://developer.android.com/tools/device.html#setting-up">Set up your device for development</a>
+	                      </ul>
+	                  </li>
+		              <li>Git. <em>Pick one:</em>
+		                  <a href="http://msysgit.github.com/">Git for Windows (msysGit)</a> <strong>OR</strong>
+		                  <a href="http://windows.github.com/">GitHub for Windows</a> <strong>OR</strong>
+		                  <a href="http://mac.github.com/">GitHub for Mac</a> <strong>OR</strong>
+		                  Your favorite git tool
+                      </li>
+		          </ul>
+		          
+		          <h4>Optional</h4>
+		          <p>The following are optional, and recommended.</p>
+		          <ul>
+		              <li><a href="http://www.eclipse.org/koneki/ldt/">Koneki LDT</a> (Lua IDE. Available standalone or as Eclipse plugin)</li>
+		          </ul>
+		      </section>
+		      
+		      <hr>
+		
+		      <section id="newtheme">
+                  <div class="page-header">
+                    <h1>Start a new theme</h1>
+                  </div>
+		          <ol>
+		              <li><code>git clone</code> the <a href="http://github.com/talklittle/redditisfun.3.light">sample theme's git repo</a>.</li>
+		              <li>Rename the directory to your theme's unique id:
+                          <p><code>mv redditisfun.3.light com.example.cooltheme</code></p>
+                      </li>
+                      <li>Change the theme settings in <code>settings.json</code>.</li>
+                      <li>Make your changes locally. Remember to <code>git commit</code> often!
+                          <p><em>See the <a href="api.html">API docs</a> for in-depth theme creation topics.</em></p>
+                      </li>
+		          </ol>
+		      </section>
+		
+		      <hr>
+
+		      <section id="convertxml">
+                  <div class="page-header">
+                    <h1>Convert from Android layout and drawable XML</h1>
+                  </div>
+		          <ol>
+		              <li><code>git clone</code> the <a href="http://github.com/talklittle/xml2lua">xml2lua git repo</a>.</li>
+		              <li>Load the project in Eclipse. <strong class="text-warning">TODO Ant script</strong></li>
+		              <li>Run <code>Layout2Lua</code> or <code>Drawable2Lua</code> with a single argument: path to the XML file.</li>
+		              <li>It will output a .lua file in the project's working directory. Move that to your theme directory and modify it as needed.</li>
+		          </ol>
+		      </section>
+		
+		      <hr>
+
+              <section id="testing">
+                  <div class="page-header">
+                      <h1>Test your theme</h1>
+                  </div>
+                  <ol>
+                      <li>Push your theme to the device:
+                          <p><code>adb push /desktop/com.example.cooltheme /sdcard/mycoolthemes/com.example.cooltheme</code></p>
+                      </li>
+                      <li>Launch reddit is fun</li>
+                      <li>Menu -> Theme</li>
+                      <li>Enable Developer mode checkbox</li>
+                      <li>Select your theme directory, e.g., <code>/sdcard/mycoolthemes/com.example.cooltheme</code></li>
+                      <li>Restart the app (press Back)</li>
+                      <li>If the theme file has errors, the theme will not show up. Instead, the error and stack trace will appear in a dialog.</li>
+                  </ol>
+              </section>
+
+              <hr>
+
+              <section id="submitting">
+                  <div class="page-header">
+                      <h1>Submit your theme</h1>
+                  </div>
+                  <p>These are instructions for getting your theme into the theme shop.</p>
+                  <p>I recognize it's a <em>very manual process</em> right now. If anyone has a better way to handle this, I'm all ears.</p>
+                  <ol>
+                      <li>Update the <code>manifest.json</code> file to show correct version. For a new theme, will be version 1.</li>
+                      <li>Zip the theme directory. You will have, e.g., <code>com.example.cooltheme.zip</code> containing a single top-level directory named <code>com.example.cooltheme</code>. As usual substituting <code>com.example.cooltheme</code> with your theme's unique id.</li>
+                      <li><em>Optionally</em> password protect the zip using your zip program.</li>
+                      <li>Upload the zip to a location I can download from.</li>
+                      <li>Take screenshots and post on <a href="http://imgur.com">imgur</a>.</li>
+                      <li>PM zip URL (with zip password) and screenshots URL to <a href="http://www.reddit.com/u/talklittle">/u/talklittle</a> on reddit.</li>
+                      <li>I will respond to you when I have downloaded the zip, so you can delete the file from the server if you want.</li>
+                      <li>Once I have tested it, I'll let you know if accepted or rejected from the theme shop.
+                      	  <p><em>Themes served from the theme shop will be compiled, and the Lua scripts therein will not be human-readable.</em></p>
+                      </li>
+                  </ol>
+              </section>
+		
+		      <div class="footer">
+		        <p>&copy; 2013 TalkLittle, LLC</p>
+		      </div>
+	      </div>
+	      
+      </div> <!-- /row -->
+    </div> <!-- /container -->
+
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="bootstrap/js/bootstrap.js"></script>
+
+  </body>
+</html>

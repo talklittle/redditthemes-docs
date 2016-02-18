@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>reddit is fun themes</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Le styles -->
+    <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
+    <style type="text/css">
+      body {
+        padding-top: 20px;
+        padding-bottom: 40px;
+      }
+
+      /* Custom container */
+      .container-narrow {
+        margin: 0 auto;
+        max-width: 700px;
+      }
+      .container-narrow > hr {
+        margin: 30px 0;
+      }
+
+      /* Main marketing message and sign up button */
+      .jumbotron.subhead {
+        padding: 40px 0;
+        margin: 0;
+      }
+      .jumbotron h1 {
+        font-size: 72px;
+        line-height: 1;
+      }
+      .jumbotron .btn {
+        font-size: 21px;
+        padding: 14px 24px;
+      }
+    </style>
+    <link href="bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+    <link href="css/docs.css" rel="stylesheet">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="../assets/js/html5shiv.js"></script>
+    <![endif]-->
+
+    <!-- Fav and touch icons -->
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="../assets/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../assets/ico/apple-touch-icon-114-precomposed.png">
+      <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/ico/apple-touch-icon-72-precomposed.png">
+                    <link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png">
+                                   <link rel="shortcut icon" href="../assets/ico/favicon.png">
+  </head>
+
+  <body data-spy="scroll" data-target=".rt-docs-sidebar">
+
+    <div class="container-narrow">
+      <div class="masthead">
+        <ul class="nav nav-pills pull-right">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="getting-started.html">Get started</a></li>
+          <li class="active"><a href="api.html">API</a></li>
+          <li><a href="http://www.reddit.com/r/redditisfunthemes">/r/</a></li>
+        </ul>
+        <h3 class="muted">reddit is fun &middot; themes</h3>
+      </div>
+
+      <hr>
+    </div>  <!-- /container-narrow -->
+    
+    <!-- Subhead
+    ================================================== -->
+    <header class="jumbotron subhead">
+      <div class="container">
+        <h1>Lua API</h1>
+        <p class="lead">Theme scripting reference</p>
+      </div>
+    </header>
+      
+    <div class="container-fluid">
+      <div class="row">
+
+          <div class="span3 rt-docs-sidebar">
+            <ul class="nav nav-list rt-docs-sidenav" data-spy="affix" data-offset-top="300">
+              <li><a href="#overview-listview"><i class="icon-chevron-right"></i> Overview: ListView</a></li>
+              <li><a href="#threads"><i class="icon-chevron-right"></i> Screen: Posts list</a></li>
+              <li><a href="#comments"><i class="icon-chevron-right"></i> Screen: Comments list</a></li>
+              <li><a href="#profile"><i class="icon-chevron-right"></i> Screen: User profile</a></li>
+              <li><a href="#inbox"><i class="icon-chevron-right"></i> Screen: Inbox</a></li>
+              <li><a href="#builder"><i class="icon-chevron-right"></i> Object: Builder</a></li>
+              <li><a href="#holder"><i class="icon-chevron-right"></i> Object: Holder</a></li>
+              <li><a href="#thing"><i class="icon-chevron-right"></i> Object: Thing</a></li>
+              <li><a href="#listitem"><i class="icon-chevron-right"></i> Object: ListItem</a></li>
+              <li><a href="#views"><i class="icon-chevron-right"></i> Views</a></li>
+              <li><a href="#global-constants"><i class="icon-chevron-right"></i> Constants</a></li>
+              <li><a href="#global-helpers"><i class="icon-chevron-right"></i> Helper classes</a></li>
+            </ul>
+          </div>
+          
+          <div class="span9">
+              <section id="overview-listview">
+                  <div class="page-header">
+                    <h1>ListViews</h1>
+                  </div>
+                  
+                  <h2>Exported functions</h2>
+                  <p>Lua scripts for ListViews will generally implement a <code>newView</code> and <code>bindView</code> function.
+                  <dl>
+                      <dt>newView(Builder)</dt>
+                      <dd>Create a View hierarchy for the list item.</dd>
+                      <dd>See <a href="#builder">Builder</a>.</dd>
+                      <dt>bindView(Holder, Thing, ListItem)</dt>
+                      <dd>Bind info to the View hierarchy for the list item.</dd>
+                      <dd>See <a href="#holder">Holder</a>.</dd>
+                      <dd>See <a href="#thing">Thing</a>.</dd>
+                      <dd>See <a href="#listitem">ListItem</a>.</dd>
+                  </dl>
+                  
+                  <h2>manifest.json</h2>
+                  <p>You can change the script filename, and <code>newView</code> and <code>bindView</code> function names in the <code>manifest.json</code> file.</p>
+                  <p><code>manifest_json["scripts"][SCRIPT_NAME]</code> is the JSON path to the <code>script</code> JSON object in the manifest.</p>
+                  <dl>
+                      <dt>script["file"]</dt>
+                      <dd>The filename. Default filename varies and will be indicated elsewhere in this guide.</dd>
+                      <dt>script["new_view"]</dt>
+                      <dd>The <code>newView</code> function name. Defaults to <code>"newView"</code>.</dd>
+                      <dt>script["bind_view"]</dt>
+                      <dd>The <code>bindView</code> function name. Defaults to <code>"bindView"</code>.</dd>
+                  </dl>
+                  
+                  <p><span class="label label-info">Hint</span> Change these properties to combine scripts into fewer files, or to reuse a script for different screens.</p>
+              </section>
+              
+              <hr>
+              
+              <section id="threads">
+                  <div class="page-header">
+                    <h1>Posts list <small>frontpage and subreddits</small></h1>
+                  </div>
+                  
+                  <h2>Script files</h2>
+                  <dl>
+                      <dt>posts_thread</dt>
+                      <dd><span class="label">Default</span> <code>manifest_json["scripts"][<strong>"posts_thread"</strong>]["file"]</code> = <code><strong>"thread_item.lua"</strong></code></dd>
+                      <dd><span class="label">Type</span> <a href="#overview-listview">ListView</a></dd>
+                      <dd>Represents a reddit <a href="https://github.com/reddit/reddit/wiki/JSON#link-implements-votable--created">link</a>.</dd>
+                      <dt>posts_comment</dt>
+                      <dd><span class="label">Default</span> <code>manifest_json["scripts"][<strong>"posts_comment"</strong>]["file"]</code> = <code><strong>"profile_comment_item.lua"</strong></code></dd>
+                      <dd><span class="label">Type</span> <a href="#overview-listview">ListView</a></dd>
+                      <dd>Represents a <em>saved</em> reddit <a href="https://github.com/reddit/reddit/wiki/JSON#comment-implements-votable--created">comment</a>.</dd>
+                  </dl>
+                  
+                  <h2>onClick callbacks</h2>
+                  <p><strong class="text-warning">TODO</strong></p>
+              </section>
+              
+              <hr>
+        
+              <section id="comments">
+                  <div class="page-header">
+                    <h1>Comments list</h1>
+                  </div>
+                  
+                  <h2>Script files</h2>
+                  <dl>
+                      <dt>comments_thread</dt>
+                      <dd><span class="label">Default</span> <code>manifest_json["scripts"][<strong>"comments_thread"</strong>]["file"]</code> = <code><strong>"thread_op.lua"</strong></code></dd>
+                      <dd><span class="label">Type</span> <a href="#overview-listview">ListView</a></dd>
+                      <dd>Represents the OP (original post), a reddit <a href="https://github.com/reddit/reddit/wiki/JSON#link-implements-votable--created">link</a>.</dd>
+                      <dt>comments_comment</dt>
+                      <dd><span class="label">Default</span> <code>manifest_json["scripts"][<strong>"comments_comment"</strong>]["file"]</code> = <code><strong>"comment_item.lua"</strong></code></dd>
+                      <dd><span class="label">Type</span> <a href="#overview-listview">ListView</a></dd>
+                      <dd>Represents a <a href="https://github.com/reddit/reddit/wiki/JSON#comment-implements-votable--created">comment</a>.</dd>
+                  </dl>
+                  
+                  <h2>onClick callbacks</h2>
+                  <p><strong class="text-warning">TODO</strong></p>
+              </section>
+        
+              <hr>
+
+              <section id="profile">
+                  <div class="page-header">
+                      <h1>User profile</h1>
+                  </div>
+
+                  <h2>Script files</h2>
+                  <dl>
+                      <dt>profile_thread</dt>
+                      <dd><span class="label">Default</span> <code>manifest_json["scripts"][<strong>"profile_thread"</strong>]["file"]</code> = <code><strong>"profile_thread_item.lua"</strong></code></dd>
+                      <dd><span class="label">Type</span> <a href="#overview-listview">ListView</a></dd>
+                      <dd>Represents a reddit <a href="https://github.com/reddit/reddit/wiki/JSON#link-implements-votable--created">link</a>.</dd>
+                      <dt>profile_comment</dt>
+                      <dd><span class="label">Default</span> <code>manifest_json["scripts"][<strong>"profile_comment"</strong>]["file"]</code> = <code><strong>"profile_comment_item.lua"</strong></code></dd>
+                      <dd><span class="label">Type</span> <a href="#overview-listview">ListView</a></dd>
+                      <dd>Represents a reddit <a href="https://github.com/reddit/reddit/wiki/JSON#comment-implements-votable--created">comment</a>.</dd>
+                      <dt>profile_header</dt>
+                      <dd><span class="label">Default</span> <code>manifest_json["scripts"][<strong>"profile_header"</strong>]["file"]</code> = <code><strong>"profile_header.lua"</strong></code></dd>
+                      <dd><span class="label">Type</span> ListView header</dd>
+                      <dd>Represents a reddit <a href="https://github.com/reddit/reddit/wiki/JSON#account">account</a>.</dd>
+                  </dl>
+                  
+                  <h2>onClick callbacks</h2>
+                  <p><strong class="text-warning">TODO</strong></p>
+              </section>
+
+              <hr>
+
+              <section id="inbox">
+                  <div class="page-header">
+                      <h1>Inbox</h1>
+                  </div>
+
+                  <h2>Script files</h2>
+                  <dl>
+                      <dt>inbox_message</dt>
+                      <dd><span class="label">Default</span> <code>manifest_json["scripts"][<strong>"inbox_message"</strong>]["file"]</code> = <code><strong>"inbox_message_item.lua"</strong></code></dd>
+                      <dd><span class="label">Type</span> <a href="#overview-listview">ListView</a></dd>
+                      <dd>Represents a reddit <a href="https://github.com/reddit/reddit/wiki/JSON#message-implements-created">message</a>.</dd>
+                      <dt>inbox_comment</dt>
+                      <dd><span class="label">Default</span> <code>manifest_json["scripts"][<strong>"inbox_comment"</strong>]["file"]</code> = <code><strong>"inbox_comment_item.lua"</strong></code></dd>
+                      <dd><span class="label">Type</span> <a href="#overview-listview">ListView</a></dd>
+                      <dd>Represents an inbox <a href="https://github.com/reddit/reddit/wiki/JSON#comment-implements-votable--created">comment</a>.</dd>
+                  </dl>
+                  
+                  <h2>onClick callbacks</h2>
+                  <p><strong class="text-warning">TODO</strong></p>
+              </section>
+        
+              <hr>
+
+              <section id="builder">
+                  <div class="page-header">
+                      <h1>Builder</h1>
+                  </div>
+                  <p>The <code>Builder</code> object builds Views. It's generally provided as an argument to the <code>newView</code> function.</p>
+                  
+                  <dl>
+                      <dt>Builder:beginFrameLayout()</dt>
+                      <dt>Builder:beginFrameLayout(idStringOrInteger)</dt>
+                      <dd>Begins a <code>FrameLayout</code> with optional View id. Views created between here and <code>Builder:endViewGroup()</code> will be children of the <code>FrameLayout</code>.</dd>
+                      <dd><code>idStringOrInteger</code> can be used to refer to the <code>FrameLayout</code> later.</dd>
+                      <dd><span class="label label-info">Note</span> <code>idStringOrInteger</code> of <code>0</code> or <code>nil</code> is same as no id.</dd>
+                      <dd><span class="label">Returns</span> <code>FrameLayout</code></dd>
+                      <dt>Builder:beginLinearLayout()</dt>
+                      <dt>Builder:beginLinearLayout(idStringOrInteger)</dt>
+                      <dd>Begins a <code>LinearLayout</code> with optional View id. Views created between here and <code>Builder:endViewGroup()</code> will be children of the <code>LinearLayout</code>.</dd>
+                      <dd>View id can be used to refer to the <code>LinearLayout</code> later.</dd>
+                      <dd><span class="label">Returns</span> <code>LinearLayout</code></dd>
+                      <dt>Builder:endViewGroup()</dt>
+                      <dd>Ends the current <code>ViewGroup</code> (e.g., <code>FrameLayout</code>).</dd>
+                      <dt>Builder:endFrameLayout()</dt>
+                      <dt>Builder:endLinearLayout()</dt>
+                      <dd>Synonyms for <code>Builder:endViewGroup()</code>.</dd>
+                      <dt>Builder:addView()</dt>
+                      <dt>Builder:addView(idStringOrInteger)</dt>
+                      <dd>Creates a new <code>View</code> and adds it to the current <code>ViewGroup</code>.</dd>
+                      <dd><code>View</code> can be useful for spacing. It's uncommonly used.</dd>
+                      <dd><span class="label">Returns</span> <code>View</code></dd>
+                      <dt>Builder:addTextView()</dt>
+                      <dt>Builder:addTextView(idStringOrInteger)</dt>
+                      <dd>Creates a new <code>TextView</code> and adds it to the current <code>ViewGroup</code>.</dd>
+                      <dd><span class="label">Returns</span> <code>TextView</code></dd>
+                      <dt>Builder:addImageView()</dt>
+                      <dt>Builder:addImageView(idStringOrInteger)</dt>
+                      <dd>Creates a new <code>ImageView</code> and adds it to the current <code>ViewGroup</code>.</dd>
+                      <dd><span class="label">Returns</span> <code>ImageView</code></dd>
+                      <dt>Builder:addProgressBar()</dt>
+                      <dt>Builder:addProgressBar(idStringOrInteger)</dt>
+                      <dd>Creates a new <code>ProgressBar</code> and adds it to the current <code>ViewGroup</code>.</dd>
+                      <dd><span class="label">Returns</span> <code>ProgressBar</code></dd>
+                      <dt>Builder:addProgressBarSmall()</dt>
+                      <dt>Builder:addProgressBarSmall(idStringOrInteger)</dt>
+                      <dd>Creates a new <code>ProgressBar</code> with style <a href="http://developer.android.com/reference/android/R.attr.html#progressBarStyleSmall">?android:attr/progressBarStyleSmall</a> and adds it to the current <code>ViewGroup</code>.</dd>
+                      <dd><span class="label">Returns</span> <code>ProgressBar</code></dd>
+                      <dt>Builder:addButton()</dt>
+                      <dt>Builder:addButton(idStringOrInteger)</dt>
+                      <dd>Creates a new <code>Button</code> and adds it to the current <code>ViewGroup</code>.</dd>
+                      <dd><span class="label">Returns</span> <code>Button</code></dd>
+                      <dt>Builder:addButtonSmall()</dt>
+                      <dt>Builder:addButtonSmall(idStringOrInteger)</dt>
+                      <dd>Creates a new <code>Button</code> with style <a href="http://developer.android.com/reference/android/R.attr.html#buttonStyleSmall">?android:attr/buttonStyleSmall</a> and adds it to the current <code>ViewGroup</code>.</dd>
+                      <dd><span class="label">Returns</span> <code>Button</code></dd>
+                      <dt>Builder:addImageButton()</dt>
+                      <dt>Builder:addImageButton(idStringOrInteger)</dt>
+                      <dd>Creates a new <code>ImageButton</code> and adds it to the current <code>ViewGroup</code>.</dd>
+                      <dd><span class="label">Returns</span> <code>ImageButton</code></dd>
+                      <dt>Builder:addImageButtonSmall()</dt>
+                      <dt>Builder:addImageButtonSmall(idStringOrInteger)</dt>
+                      <dd>Creates a new <code>ImageButton</code> with style <a href="http://developer.android.com/reference/android/R.attr.html#buttonStyleSmall">?android:attr/buttonStyleSmall</a> and adds it to the current <code>ViewGroup</code>.</dd>
+                      <dd><span class="label">Returns</span> <code>ImageButton</code></dd>
+                  </dl>
+              </section>
+        
+              <hr>
+
+              <section id="holder">
+                  <div class="page-header">
+                      <h1>Holder</h1>
+                  </div>
+                  <p><code>Holder</code> is generally provided as an argument to the <code>bindView</code> function. It's used to gain access to the <code>View</code>s that the <code>Builder</code> created in <code>newView</code>.</p>
+                  <dl>
+                      <dt>Holder:getView(idStringOrInteger)</dt>
+                      <dd><span class="label">Returns</span> <code>View</code> with this id.
+                  </dl>
+              </section>
+        
+              <hr>
+
+              <section id="thing">
+                  <div class="page-header">
+                      <h1>Thing</h1>
+                  </div>
+                  <p>Generally passed as an argument to <code>bindView</code>. See <a href="https://github.com/reddit/reddit/wiki/JSON">https://github.com/reddit/reddit/wiki/JSON</a></p>
+                  <p><code>Thing</code>, when accessed via the Lua API, is read-only.</p>
+                  <p><span class="label label-success">Look</span> You should look at the <a href="doc-thing/index.html">javadocs for Things</a> for the supported properties.</p>
+              </section>
+        
+              <hr>
+
+              <section id="listitem">
+                  <div class="page-header">
+                      <h1>ListItem</h1>
+                  </div>
+                  <p><code>ListItem</code> is generally provided as an argument to the <code>bindView</code> function. It provides functionality surrounding the list item, in relation to the <code>ListView</code> and <code>ListAdapter</code> that contain it.</p>
+                  <dl>
+                      <dt>ListItem:toggleChecked()</dt>
+                      <dd>Sets the (single) checked position to the current position, or unsets it if current position is already the checked position.</dd>
+                      <dt>ListItem:isChecked()</dt>
+                      <dd><span class="label">Returns</span> <code>true</code> or <code>false</code> depending if it's the currently-checked position.</dd>
+                      <dt>ListItem:getTop()</dt>
+                      <dd><span class="label">Returns</span> Integer, pixels from the top of the <code>ListView</code> on screen.</dd>
+                      <dt>ListItem:setTop(pixels)</dt>
+                      <dd>Moves the item <code>pixels</code> pixels from the top of the <code>ListView</code>.</dd>
+                  </dl>
+              </section>
+        
+              <hr>
+
+              <section id="views">
+                  <div class="page-header">
+                      <h1>Views</h1>
+                  </div>
+                  <p>These are wrappers for the <a href="http://developer.android.com/reference/android/view/View.html">Android View classes</a>.</p>
+                  <p>You create Views with <code>Builder</code> and access them later with <code>Holder</code>.</p>
+                  <p><span class="label label-success">Look</span> You should look at the <a href="doc-view/index.html">javadocs for Views</a>.</p>
+              </section>
+                  
+              <hr>
+
+              <section id="global-constants">
+                  <div class="page-header">
+                      <h1>Constants</h1>
+                  </div>
+                  
+                  <p><span class="label label-info">Note</span> Global constants are all referenced by <code>redditisfun.CONSTANTNAME</code>, e.g., <code>redditisfun.TEXT_SIZE_LARGE</code>
+                  
+                  <dl>
+                      <dt>TEXT_SIZE_LARGE</dt>
+                      <dt>TEXT_SIZE_MEDIUM</dt>
+                      <dt>TEXT_SIZE_SMALL</dt>
+                      <dd>Integer, pixels.</dd>
+                      <dd>Text sizes based on user's app settings.</dd>
+                      <dd><code>TEXT_SIZE_LARGE</code> is generally 4sp larger than <code>TEXT_SIZE_MEDIUM</code>.</dd>
+                      <dd><code>TEXT_SIZE_SMALL</code> is generally 4sp smaller than <code>TEXT_SIZE_MEDIUM</code>.</dd>
+                      <dt>TEXT_COLOR_PRIMARY</dt>
+                      <dt>TEXT_COLOR_SECONDARY</dt>
+                      <dd>Integer, color.</dd>
+                      <dd><a href="http://developer.android.com/reference/android/R.attr.html#textColorPrimary">?android:attr/textColorPrimary</a></dd>
+                      <dd><a href="http://developer.android.com/reference/android/R.attr.html#textColorSecondary">?android:attr/textColorSecondary</a></dd>
+                      <dt>ACTIONBAR_ITEM_BACKGROUND</dt>
+                      <dd>Integer, resource id.</dd>
+                      <dd><a href="http://developer.android.com/reference/android/R.attr.html#actionBarItemBackground">?android:attr/actionBarItemBackground</a></dd>
+                  </dl>
+              </section>
+        
+              <hr>
+
+              <section id="global-helpers">
+                  <div class="page-header">
+                      <h1>Helper classes</h1>
+                  </div>
+                  
+                  <p><span class="label label-info">Note</span> Global helper classes are referenced by <code>redditisfun.ClassName</code>, e.g., <code>redditisfun.Fonts</code>.</p>
+                  
+                  <h2>Fonts</h2>
+                  <dl>
+	                  <dt>Fonts:registerNormal(typefaceName, fontPath)</dt>
+                      <dt>Fonts:registerBold(typefaceName, fontPath)</dt>
+                      <dt>Fonts:registerItalic(typefaceName, fontPath)</dt>
+                      <dt>Fonts:registerBoldItalic(typefaceName, fontPath)</dt>
+	                  <dd>Register font typefaces, which then become usable in <code>TextView:setTypeface(typefaceName)</code>.</dd>
+	                  <dd><code>typefaceName</code> is any identifier you want.</dd>
+	                  <dd><code>fontPath</code> is the relative path to the font file in your theme folder.</dd>
+	                  <dd><span class="label label-info">Example</span> <code>Fonts:registerNormal("Roboto", "fonts/Roboto-Regular.ttf")</code></dd>
+	                  <dd><span class="label label-info">Example</span> <code>Fonts:registerBold("Roboto", "fonts/Roboto-Bold.ttf")</code></dd>
+	                  <dd><span class="label label-info">Example</span> <code>Fonts:registerItalic("Roboto", "fonts/Roboto-Italic.ttf")</code></dd>
+	                  <dd><span class="label label-info">Example</span> <code>Fonts:registerBoldItalic("Roboto", "fonts/Roboto-BoldItalic.ttf")</code></dd>
+                  </dl>
+                  
+                  <h2>Spans</h2>
+                  <dl>
+                      <dt>Spans:builder()</dt>
+                      <dd><span class="label">Returns</span> An empty SpannableStringBuilder.</dd>
+                      <dt>Spans:addColor(originalCharSequence, colorString)</dt>
+                      <dd>Add a color span to the <code>originalCharSequence</code> which may be a regular String.</dd>
+                      <dd><code>colorString</code> is <code>"#RRGGBB"</code> or <code>"#AARRGGBB"</code> or color names.</dd>
+                      <dd>All supported <code>colorString</code> formats from <a href="http://developer.android.com/reference/android/graphics/Color.html#parseColor(java.lang.String)">android.graphics.Color.parseColor()</a>.</dd>
+                      <dd><span class="label">Returns</span> The CharSequence with new Span attached.</dd>
+                      <dt>Spans:addBackgroundColor(originalCharSequence, colorString)</dt>
+                      <dd><code>colorString</code> is <code>"#RRGGBB"</code> or <code>"#AARRGGBB"</code> or color names.</dd>
+                      <dd><span class="label">Returns</span> The CharSequence with new Span attached.</dd>
+                      <dt>Spans:addStyle(originalCharSequence, styleName)</dt>
+                      <dd><code>styleName</code> is one of: <code>"normal"</code>, <code>"bold"</code>, <code>"italic"</code>, <code>"bold|italic"</code></dd>
+                      <dd><span class="label">Returns</span> The CharSequence with new Span attached.</dd>
+                      <dt>Spans:addSize(originalCharSequence, textSize)</dt>
+                      <dd><code>textSize</code> is either a String like <code>"12sp"</code>, or a pixel integer value <span class="text-warning">(not recommended)</span> like <code>20</code>.</dd>
+                      <dd><span class="label">Returns</span> The CharSequence with new Span attached.</dd>
+                  </dl>
+                  
+                  <h2>Toasts</h2>
+                  <dl>
+                      <dt>Toasts:showToastShort(text)</dt>
+                      <dt>Toasts:showToastLong(text)</dt>
+                      <dd>Display a <a href="http://developer.android.com/guide/topics/ui/notifiers/toasts.html">Toast</a> with short or long duration.</dd>
+                      <dt>Toasts:showHintShort(text, view)</dt>
+                      <dt>Toasts:showHintLong(text, view)</dt>
+                      <dd>Display a Toast located in proximity to the provided <code>view</code> on screen.</dd>
+                      <dd><span class="label label-info">Hint</span> This is useful in conjunction with <code>View:setOnLongClick()</code>.</dd>
+                      <dd><span class="label label-info">Example</span> <code>upvote_button:setOnLongClick(function(v) Toasts:showHintShort("Upvote the comment", v) end)</code></dd>
+                  </dl>
+              </section>
+        
+              <div class="footer">
+                <p>&copy; 2013 TalkLittle, LLC</p>
+              </div>
+          </div>
+          
+      </div> <!-- /row -->
+    </div> <!-- /container -->
+
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="bootstrap/js/bootstrap.js"></script>
+
+  </body>
+</html>
